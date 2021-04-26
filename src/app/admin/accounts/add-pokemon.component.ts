@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '@app/_services';
+import { HomeComponent } from '@app/home';
+import { Pokemon } from '@app/_models';
 
 
 @Component({ templateUrl: 'add-pokemon.component.html' })
@@ -12,6 +15,7 @@ export class AddPokemonComponent implements OnInit {
     isAddMode: boolean;
     loading = false;
     submitted = false;
+    pokemons = Pokemon.pokemons;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,7 +38,7 @@ export class AddPokemonComponent implements OnInit {
 
     get f() { return this.form.controls; }
 
-    onSubmit() {
+    saveData(){
       this.submitted = true;
 
       this.alertService.clear();
@@ -45,26 +49,15 @@ export class AddPokemonComponent implements OnInit {
 
       this.loading = true;
       if (this.isAddMode) {
-          this.createAccount();
+          Pokemon.pokemons.push(this.form.value);
+          this.router.navigate(['../'], { relativeTo: this.route });
       } else {
-          this.updateAccount();
+          Pokemon.pokemons.find(x => x.id == this.form.value.id);
+          Pokemon.pokemons.push(this.form.value);
+          this.router.navigate(['../'], { relativeTo: this.route });
       }
-  }
+    }
 
-  private createAccount() {
-      this.accountService.create(this.form.value)
-          .pipe(first())
-          .subscribe({
-              next: () => {
-                  this.alertService.success('Account created successfully', { keepAfterRouteChange: true });
-                  this.router.navigate(['../'], { relativeTo: this.route });
-              },
-              error: error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-              }
-          });
-  }
 
   private updateAccount() {
       this.accountService.update(this.id, this.form.value)
