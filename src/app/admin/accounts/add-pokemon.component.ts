@@ -15,7 +15,6 @@ export class AddPokemonComponent implements OnInit {
     isAddMode: boolean;
     loading = false;
     submitted = false;
-    pokemons = Pokemon.pokemons;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -52,9 +51,7 @@ export class AddPokemonComponent implements OnInit {
           Pokemon.pokemons.push(this.form.value);
           this.router.navigate(['../'], { relativeTo: this.route });
       } else {
-          Pokemon.pokemons.find(x => x.id == this.form.value.id);
-          Pokemon.pokemons.push(this.form.value);
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.updateAccount();
       }
     }
 
