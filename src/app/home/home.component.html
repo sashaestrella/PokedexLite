@@ -1,0 +1,32 @@
+﻿<div class="p-4">
+    <div class="container">
+        <h1>Hi !</h1>
+        <p>You're logged in Pokedex - Lite</p>
+    <a routerLink="/admin/accounts/addPokemon" class="btn btn-sm btn-success mb-2">Add new pokemon</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width:30%">Type</th>
+            <th style="width:30%">Name</th>
+            <th style="width:30%">Lvl</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pokemon of pokemons">
+            <td>{{pokemon.type}}</td>
+            <td>{{pokemon.name}}</td>
+            <td>{{pokemon.lvl}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="/admin/accounts/editPokemon/{{pokemon.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+            </td>
+        </tr>
+        <tr *ngIf="!pokemons">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
