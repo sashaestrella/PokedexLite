@@ -1,5 +1,4 @@
 import { AddPokemonComponent } from './add-pokemon.component';
-import { EditPokemonComponent } from './edit-pokemon.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -17,7 +16,6 @@ import { AddEditComponent } from './add-edit.component';
     declarations: [
         ListComponent,
         AddEditComponent,
-        EditPokemonComponent,
         AddPokemonComponent
     ]
 })

@@ -4,13 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ListComponent } from './list.component';
 import { AddEditComponent } from './add-edit.component';
-import { EditPokemonComponent } from './edit-pokemon.component';
 
 const routes: Routes = [
     { path: '', component: ListComponent },
     { path: 'add', component: AddEditComponent },
     { path: 'addPokemon', component: AddPokemonComponent },
-    { path: 'editPokemon/:id', component: EditPokemonComponent },
+    { path: 'addPokemon/:id', component: AddPokemonComponent },
     { path: 'edit/:id', component: AddEditComponent }
 ];
 
